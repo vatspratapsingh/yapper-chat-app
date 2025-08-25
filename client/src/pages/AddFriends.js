@@ -12,7 +12,6 @@ import {
 } from 'react-icons/fi';
 
 const AddFriends = () => {
-  const { user } = useAuth();
   const navigate = useNavigate();
   
   const [searchQuery, setSearchQuery] = useState('');

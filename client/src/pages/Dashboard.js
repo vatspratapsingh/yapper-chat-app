@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../contexts/AuthContext';
 import { useSocket } from '../contexts/SocketContext';
@@ -8,7 +8,6 @@ import {
   FiSearch, 
   FiMessageCircle, 
   FiPhone, 
-  FiUser, 
   FiLogOut, 
   FiSettings,
   FiPlus,
@@ -17,7 +16,7 @@ import {
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
-  const { isConnected, onlineFriends, startCall } = useSocket();
+  const { isConnected, startCall } = useSocket();
   const navigate = useNavigate();
   
   const [friends, setFriends] = useState([]);

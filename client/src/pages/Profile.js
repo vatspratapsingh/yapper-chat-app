@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../contexts/AuthContext';
-import { FiArrowLeft, FiCamera, FiSave, FiUser, FiMail, FiEdit3 } from 'react-icons/fi';
+import { FiArrowLeft, FiCamera, FiSave, FiEdit3 } from 'react-icons/fi';
 
 const Profile = () => {
   const { user, updateProfile, uploadAvatar, changePassword } = useAuth();

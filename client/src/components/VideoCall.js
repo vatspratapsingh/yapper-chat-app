@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSocket } from '../contexts/SocketContext';
-import { FiPhone, FiPhoneOff, FiMic, FiMicOff, FiVideo, FiVideoOff, FiMonitor } from 'react-icons/fi';
+import { FiPhoneOff, FiMic, FiMicOff, FiVideo, FiVideoOff, FiMonitor } from 'react-icons/fi';
 
 const VideoCall = () => {
   const {
