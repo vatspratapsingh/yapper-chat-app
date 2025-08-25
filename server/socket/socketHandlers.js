@@ -62,6 +62,7 @@ const setupSocketHandlers = (io) => {
 
     // Handle private messages
     socket.on('send_message', async (data) => {
+      console.log('Received send_message event:', data);
       try {
         const { receiverId, content, messageType = 'text', replyTo } = data;
 

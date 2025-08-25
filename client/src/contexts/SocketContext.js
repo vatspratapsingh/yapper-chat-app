@@ -327,6 +327,7 @@ export const SocketProvider = ({ children }) => {
 
   // Send message
   const sendMessage = (receiverId, content, messageType = 'text', replyTo = null) => {
+    console.log('SocketContext sendMessage called:', { receiverId, content, socket: !!socket, isConnected });
     if (socket && isConnected) {
       socket.emit('send_message', {
         receiverId,
@@ -334,6 +335,8 @@ export const SocketProvider = ({ children }) => {
         messageType,
         replyTo
       });
+    } else {
+      console.error('Socket not connected or not available');
     }
   };
 

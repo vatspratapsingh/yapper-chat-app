@@ -92,6 +92,7 @@ const Chat = () => {
     e.preventDefault();
     if (!newMessage.trim() || sending) return;
 
+    console.log('Sending message to:', userId, 'Content:', newMessage.trim());
     setSending(true);
     sendMessage(userId, newMessage.trim());
     setNewMessage('');
