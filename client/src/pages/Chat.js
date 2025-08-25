@@ -94,7 +94,29 @@ const Chat = () => {
 
     console.log('Sending message to:', userId, 'Content:', newMessage.trim());
     setSending(true);
-    sendMessage(userId, newMessage.trim());
+    
+    try {
+      // Try Socket.IO first
+      sendMessage(userId, newMessage.trim());
+      
+      // Fallback: Send via HTTP API if Socket.IO fails
+      setTimeout(async () => {
+        try {
+          const response = await axios.post('/api/messages', {
+            receiverId: userId,
+            content: newMessage.trim()
+          });
+          console.log('Message sent via HTTP API:', response.data);
+          setMessages(prev => [...prev, response.data.message]);
+        } catch (error) {
+          console.error('Failed to send message via HTTP API:', error);
+        }
+      }, 1000);
+      
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+    
     setNewMessage('');
     stopTyping(userId);
   };
