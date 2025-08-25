@@ -1,0 +1,44 @@
+{
+  "name": "Yapper Chat App",
+  "description": "Real-time chat application with video calls",
+  "repository": "https://github.com/vatspratapsingh/yapper-chat-app",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "react", "socket.io", "webrtc", "chat"],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment",
+      "value": "production"
+    },
+    "JWT_SECRET": {
+      "description": "JWT Secret Key",
+      "generator": "secret"
+    },
+    "JWT_EXPIRE": {
+      "description": "JWT Expiration",
+      "value": "30d"
+    },
+    "MAX_FILE_SIZE": {
+      "description": "Maximum file size in bytes",
+      "value": "5242880"
+    },
+    "RATE_LIMIT_WINDOW_MS": {
+      "description": "Rate limit window in milliseconds",
+      "value": "900000"
+    },
+    "RATE_LIMIT_MAX_REQUESTS": {
+      "description": "Maximum requests per window",
+      "value": "100"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  }
+}

@@ -81,7 +81,7 @@ setupSocketHandlers(io);
 // Make io available to routes
 app.set('io', io);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5002;
 
 // Only start server if not in Vercel serverless environment
 if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
