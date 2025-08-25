@@ -1,307 +1,141 @@
-# Yapper - Real-time Chat & Video Calls
+# Yapper - Real-time Chat & Video Call App
 
-A modern, full-stack real-time chat application with video calls, friend requests, and mobile-responsive design.
+A modern, full-stack real-time chatting application with video call functionality, built with React, Node.js, Socket.IO, and WebRTC.
 
-## Features
+## 🚀 Features
 
-### 🚀 Core Features
-- **Real-time Messaging**: Instant message delivery with Socket.IO
-- **Video Calls**: WebRTC-powered peer-to-peer video calls
+- **Real-time Chat**: Instant messaging with Socket.IO
+- **Video Calls**: Peer-to-peer video calls using WebRTC
 - **Friend System**: Send, accept, and manage friend requests
-- **User Profiles**: Customizable profiles with avatars and status
-- **Mobile Responsive**: Works seamlessly on desktop and mobile devices
+- **User Authentication**: Secure JWT-based authentication
+- **Mobile Responsive**: Works perfectly on mobile devices
+- **Modern UI**: Beautiful interface with Tailwind CSS
+- **File Uploads**: Avatar uploads and message attachments
+- **Online Status**: Real-time online/offline indicators
 
-### 💬 Chat Features
-- Real-time message delivery
-- Typing indicators
-- Read receipts
-- Message reactions
-- File sharing (images, documents)
-- Message editing and deletion
-- Reply to messages
-- Emoji support
-
-### 📹 Video Call Features
-- One-on-one video calls
-- Audio/video controls
-- Screen sharing capability
-- Call notifications
-- Call history
-
-### 👥 Social Features
-- Friend requests and management
-- User search and discovery
-- Online/offline status
-- Friend suggestions
-- User blocking
-
-### 🎨 UI/UX Features
-- Modern, responsive design
-- Dark/light theme support
-- Real-time notifications
-- Loading states and animations
-- Mobile-first approach
-
-## Tech Stack
-
-### Backend
-- **Node.js** - Runtime environment
-- **Express.js** - Web framework
-- **Socket.IO** - Real-time communication
-- **MongoDB** - Database
-- **Mongoose** - ODM
-- **JWT** - Authentication
-- **bcryptjs** - Password hashing
-- **Multer** - File uploads
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React** - UI library
-- **React Router** - Navigation
-- **Socket.IO Client** - Real-time communication
-- **Tailwind CSS** - Styling
-- **React Hook Form** - Form management
-- **React Hot Toast** - Notifications
-- **Framer Motion** - Animations
-- **WebRTC** - Video calls
+- **React** with TypeScript
+- **Tailwind CSS** for styling
+- **Socket.IO Client** for real-time communication
+- **WebRTC** for video calls
+- **React Router** for navigation
+- **React Hook Form** for form handling
+- **React Hot Toast** for notifications
 
-## Prerequisites
+### Backend
+- **Node.js** with Express
+- **Socket.IO** for real-time features
+- **MongoDB** with Mongoose
+- **JWT** for authentication
+- **bcryptjs** for password hashing
+- **Multer** for file uploads
 
-Before running this application, make sure you have the following installed:
-
-- **Node.js** (v14 or higher)
-- **npm** or **yarn**
-- **MongoDB** (local installation or MongoDB Atlas)
-
-## Installation
+## 📦 Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
-   cd Yapper
+   git clone https://github.com/YOUR_USERNAME/yapper-chat-app.git
+   cd yapper-chat-app
    ```
 
 2. **Install dependencies**
    ```bash
-   # Install server dependencies
-   npm install
-   
-   # Install client dependencies
-   cd client
-   npm install
-   cd ..
+   npm run install-all
    ```
 
-3. **Environment Setup**
+3. **Set up environment variables**
    ```bash
-   # Copy environment example
    cp env.example .env
-   
-   # Edit .env file with your configuration
-   nano .env
    ```
+   Edit `.env` with your MongoDB URI and other settings.
 
-4. **Environment Variables**
-   ```env
-   # Server Configuration
-   PORT=5000
-   NODE_ENV=development
-   
-   # MongoDB Configuration
-   MONGODB_URI=mongodb://localhost:27017/yapper
-   
-   # JWT Configuration
-   JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-   JWT_EXPIRE=7d
-   
-   # File Upload Configuration
-   MAX_FILE_SIZE=5242880
-   UPLOAD_PATH=./uploads
-   
-   # Rate Limiting
-   RATE_LIMIT_WINDOW_MS=900000
-   RATE_LIMIT_MAX_REQUESTS=100
-   ```
-
-5. **Create upload directories**
-   ```bash
-   mkdir -p uploads/avatars uploads/messages
-   ```
-
-## Running the Application
-
-### Development Mode
-
-1. **Start the server**
-   ```bash
-   npm run server
-   ```
-
-2. **Start the client** (in a new terminal)
-   ```bash
-   npm run client
-   ```
-
-3. **Or run both simultaneously**
+4. **Start development servers**
    ```bash
    npm run dev
    ```
 
-### Production Mode
+## 🌐 Deployment
 
-1. **Build the client**
-   ```bash
-   npm run build
-   ```
+### Railway (Recommended)
+1. Connect your GitHub repository to Railway
+2. Add environment variables in Railway dashboard
+3. Deploy automatically
 
-2. **Start the server**
-   ```bash
-   npm start
-   ```
+### Vercel
+1. Push to GitHub
+2. Connect repository to Vercel
+3. Configure environment variables
+4. Deploy
 
-## API Endpoints
+## 🔧 Environment Variables
+
+```env
+PORT=5002
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRE=30d
+NODE_ENV=development
+MAX_FILE_SIZE=5242880
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+```
+
+## 📱 Usage
+
+1. **Register/Login**: Create an account or sign in
+2. **Add Friends**: Search and send friend requests
+3. **Start Chatting**: Click on friends to start conversations
+4. **Video Calls**: Use the video call button for face-to-face chats
+5. **Manage Profile**: Update your avatar and profile information
+
+## 🎯 API Endpoints
 
 ### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/logout` - Logout user
-- `GET /api/auth/me` - Get current user profile
-- `PUT /api/auth/profile` - Update user profile
-- `POST /api/auth/avatar` - Upload avatar
-- `POST /api/auth/change-password` - Change password
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
 
 ### Users
 - `GET /api/users/search` - Search users
-- `GET /api/users/:userId` - Get user profile
-- `GET /api/users/online/friends` - Get online friends
-- `PUT /api/users/status` - Update user status
-- `GET /api/users/suggestions/friends` - Get friend suggestions
+- `PUT /api/users/profile` - Update profile
+- `PUT /api/users/avatar` - Upload avatar
 
 ### Friends
 - `POST /api/friends/request` - Send friend request
-- `PUT /api/friends/request/:requestId` - Accept/reject friend request
-- `DELETE /api/friends/:friendId` - Remove friend
-- `GET /api/friends/requests` - Get pending requests
 - `GET /api/friends/list` - Get friends list
-- `POST /api/friends/block/:userId` - Block user
-- `DELETE /api/friends/block/:userId` - Unblock user
-- `GET /api/friends/blocked` - Get blocked users
+- `GET /api/friends/requests` - Get pending requests
+- `PUT /api/friends/request/:id` - Accept/reject request
 
 ### Messages
+- `GET /api/messages/:userId` - Get chat history
 - `POST /api/messages` - Send message
-- `POST /api/messages/file` - Send file message
-- `GET /api/messages/:userId` - Get conversation
-- `PUT /api/messages/:messageId/read` - Mark as read
-- `PUT /api/messages/:messageId` - Edit message
-- `DELETE /api/messages/:messageId` - Delete message
-- `POST /api/messages/:messageId/reaction` - Add reaction
-- `DELETE /api/messages/:messageId/reaction` - Remove reaction
-- `GET /api/messages/unread/count` - Get unread count
 
-## Socket.IO Events
+## 🔒 Security Features
 
-### Client to Server
-- `send_message` - Send a message
-- `typing_start` - Start typing indicator
-- `typing_stop` - Stop typing indicator
-- `mark_read` - Mark message as read
-- `status_change` - Update user status
-- `video_call_request` - Request video call
-- `video_call_answer` - Answer video call
-- `video_call_offer` - Send WebRTC offer
-- `video_call_answer_sdp` - Send WebRTC answer
-- `video_call_ice_candidate` - Send ICE candidate
-- `video_call_end` - End video call
+- JWT authentication
+- Password hashing with bcrypt
+- Rate limiting
+- CORS protection
+- Input validation
+- File upload restrictions
 
-### Server to Client
-- `new_message` - New message received
-- `message_sent` - Message sent confirmation
-- `user_typing` - User typing indicator
-- `user_stopped_typing` - User stopped typing
-- `message_read` - Message read receipt
-- `friend_status_change` - Friend status update
-- `incoming_call` - Incoming call notification
-- `call_answered` - Call answered response
-- `call_ended` - Call ended notification
-- `call_offer` - WebRTC offer
-- `call_answer_sdp` - WebRTC answer
-- `ice_candidate` - ICE candidate
+## 📄 License
 
-## Project Structure
+MIT License - feel free to use this project for your own applications!
 
-```
-Yapper/
-├── server/                 # Backend server
-│   ├── index.js           # Main server file
-│   ├── models/            # Database models
-│   │   ├── User.js
-│   │   └── Message.js
-│   ├── routes/            # API routes
-│   │   ├── auth.js
-│   │   ├── users.js
-│   │   ├── friends.js
-│   │   └── messages.js
-│   ├── middleware/        # Middleware
-│   │   └── auth.js
-│   └── socket/            # Socket.IO handlers
-│       └── socketHandlers.js
-├── client/                # Frontend React app
-│   ├── public/            # Public assets
-│   ├── src/               # Source code
-│   │   ├── components/    # React components
-│   │   ├── contexts/      # React contexts
-│   │   ├── pages/         # Page components
-│   │   ├── hooks/         # Custom hooks
-│   │   ├── utils/         # Utility functions
-│   │   ├── App.js         # Main app component
-│   │   └── index.js       # Entry point
-│   ├── package.json       # Client dependencies
-│   └── tailwind.config.js # Tailwind configuration
-├── uploads/               # File uploads
-│   ├── avatars/           # User avatars
-│   └── messages/          # Message files
-├── package.json           # Server dependencies
-├── env.example            # Environment variables example
-└── README.md              # Project documentation
-```
-
-## Mobile Support
-
-The application is fully responsive and works on mobile devices with the following features:
-
-- Touch-friendly interface
-- Mobile-optimized video calls
-- Responsive chat interface
-- Mobile navigation
-- Touch gestures support
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
-## License
+## 📞 Support
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-If you encounter any issues or have questions, please:
-
-1. Check the [Issues](https://github.com/yourusername/yapper/issues) page
-2. Create a new issue with detailed information
-3. Contact the maintainers
-
-## Acknowledgments
-
-- [Socket.IO](https://socket.io/) for real-time communication
-- [WebRTC](https://webrtc.org/) for video calls
-- [Tailwind CSS](https://tailwindcss.com/) for styling
-- [React](https://reactjs.org/) for the UI framework
-- [MongoDB](https://www.mongodb.com/) for the database
+If you have any questions or issues, please open an issue on GitHub.
 
 ---
 
-**Happy Chatting! 🚀**
+**Built with ❤️ using modern web technologies**
