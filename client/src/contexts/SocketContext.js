@@ -23,7 +23,7 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated && token && user) {
-      const newSocket = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:5002', {
+              const newSocket = io(process.env.REACT_APP_SOCKET_URL || (process.env.NODE_ENV === 'production' ? window.location.origin : 'http://localhost:5002'), {
         auth: { token },
         transports: ['websocket', 'polling'],
       });

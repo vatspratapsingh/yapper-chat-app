@@ -18,7 +18,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: process.env.NODE_ENV === 'production' ? ["https://yapper-chat-l61kb9fuq-vats-pratap-singhs-projects.vercel.app"] : "http://localhost:3000",
+    origin: process.env.NODE_ENV === 'production' ? true : "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/yapper', 
 // Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? ["https://yapper-chat-l61kb9fuq-vats-pratap-singhs-projects.vercel.app"] : "http://localhost:3000",
+  origin: process.env.NODE_ENV === 'production' ? true : "http://localhost:3000",
   credentials: true
 }));
 
