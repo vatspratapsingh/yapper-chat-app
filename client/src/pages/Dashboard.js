@@ -24,9 +24,22 @@ const Dashboard = () => {
   const [filteredFriends, setFilteredFriends] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   useEffect(() => {
     fetchFriends();
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setOpenDropdown(null);
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
   useEffect(() => {
@@ -78,6 +91,21 @@ const Dashboard = () => {
 
   const handleVideoCall = (friend) => {
     startCall(friend._id, 'video');
+  };
+
+  const handleMoreOptions = (friend, e) => {
+    e.stopPropagation();
+    setOpenDropdown(openDropdown === friend._id ? null : friend._id);
+  };
+
+  const handleRemoveFriend = async (friend) => {
+    try {
+      await axios.delete(`/api/friends/${friend._id}`);
+      setFriends(prev => prev.filter(f => f._id !== friend._id));
+      setOpenDropdown(null);
+    } catch (error) {
+      console.error('Error removing friend:', error);
+    }
   };
 
   const getStatusColor = (status) => {
@@ -222,15 +250,28 @@ const Dashboard = () => {
                           >
                             <FiPhone size={16} />
                           </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              // Handle more options
-                            }}
-                            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
-                          >
-                            <FiMoreVertical size={16} />
-                          </button>
+                          <div className="relative">
+                            <button
+                              onClick={(e) => handleMoreOptions(friend, e)}
+                              className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+                            >
+                              <FiMoreVertical size={16} />
+                            </button>
+                            
+                            {openDropdown === friend._id && (
+                              <div className="absolute right-0 top-full mt-1 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleRemoveFriend(friend);
+                                  }}
+                                  className="w-full px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50 rounded-lg"
+                                >
+                                  Remove Friend
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>

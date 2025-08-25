@@ -74,15 +74,22 @@ const Chat = () => {
 
   const fetchUserAndMessages = async () => {
     try {
+      console.log('Fetching user and messages for userId:', userId);
       const [userResponse, messagesResponse] = await Promise.all([
         axios.get(`/api/users/${userId}`),
         axios.get(`/api/messages/${userId}`)
       ]);
 
+      console.log('User response:', userResponse.data);
+      console.log('Messages response:', messagesResponse.data);
+
       setOtherUser(userResponse.data.user);
-      setMessages(messagesResponse.data.messages);
+      setMessages(messagesResponse.data.messages || []);
     } catch (error) {
       console.error('Error fetching data:', error);
+      // Show error message instead of white screen
+      setOtherUser(null);
+      setMessages([]);
     } finally {
       setLoading(false);
     }
