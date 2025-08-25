@@ -152,24 +152,45 @@ const Chat = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="loading-spinner"></div>
-      </div>
+      <>
+        <Helmet>
+          <title>Loading Chat - Yapper</title>
+        </Helmet>
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-center">
+            <div className="loading-spinner mb-4"></div>
+            <p className="text-gray-500">Loading chat...</p>
+          </div>
+        </div>
+      </>
     );
   }
 
   if (!otherUser) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-gray-500">User not found</p>
-      </div>
+      <>
+        <Helmet>
+          <title>User Not Found - Yapper</title>
+        </Helmet>
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-center">
+            <p className="text-gray-500 mb-4">User not found</p>
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+            >
+              Back to Dashboard
+            </button>
+          </div>
+        </div>
+      </>
     );
   }
 
   return (
     <>
       <Helmet>
-        <title>Chat with {otherUser.fullName} - Yapper</title>
+        <title>Chat with {otherUser?.fullName || 'User'} - Yapper</title>
       </Helmet>
 
       <div className="flex flex-col h-screen bg-gray-50">

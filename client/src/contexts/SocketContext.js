@@ -40,7 +40,10 @@ export const SocketProvider = ({ children }) => {
 
       newSocket.on('connect_error', (error) => {
         console.error('Socket connection error:', error);
-        toast.error('Connection error. Please refresh the page.');
+        // Don't show toast for connection errors in production
+        if (process.env.NODE_ENV !== 'production') {
+          toast.error('Connection error. Please refresh the page.');
+        }
       });
 
       // Friend status changes
